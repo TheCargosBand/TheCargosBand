@@ -71,13 +71,34 @@
       margin: 0 10px;
       color: #f94d00;
     }
+
+	@keyframes fadeSlideUp {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animated-text {
+		  animation: fadeSlideUp 1.5s ease forwards;
+	}
+
+	  .animated-subtext {
+		  animation: fadeSlideUp 1.5s ease forwards;
+		  animation-delay 0.5s
+		  opacity: 0;
+	  }
+		
   </style>
 </head>
 <body>
 
   <header>
-    <h1>The Cargos</h1>
-    <p>Est. 2025.</p>
+	  <h1 class="animated-text">The Cargos</h1>
+	  <p class ="animated-subtext">Est. 2025.</p>
   </header>
 
   <nav>
@@ -90,7 +111,7 @@
 
   <section id="about">
     <h2>About</h2>
-    <p>The Cargos are a 2-piece indie rock band known for gritty guitar riffs, haunting solos, and raw energy. Based in Glasgow, we blend classic influences with a modern edge. Formed in 2025, we’re here to shake things up.</p>
+    <p>The Cargos are a 4-piece indie rock band known for gritty guitar riffs, haunting solos, and raw energy. Based in Glasgow, we blend classic influences with a modern edge. Formed in 2025, we’re here to shake things up.</p>
   </section>
 
   <section id="music">
@@ -100,10 +121,9 @@
 			<source src="debut.mp3" type="audio/mpeg">
 			Your browser doesnt support the audio element.
 		</audio controls>
-		<p> All new releases on Soundcloud</p>
 		<a href="https://on.soundcloud.com/YHZV6HkpFVej3y5NVQ" target="_blank">Listen to us on Soundcloud!</a>
 	<h2>Whats Next?</h2>
-	<p> The Cargos are currently working on an inaugral album named "May Contain Cargo." This does not yet have a release date but expect late 2025 - early 2026. As of now, our song is only available on Soundcloud and this website but that will change with the release of our album</p>
+	<p> The Cargos are currently working on an inaugral album named "May Contain Cargo." This does not yet have a release date but expect late 2025 - early 2026. As of now, our song is only available on Soundcloud and this website but that will change with the release of our album. Our album cover is shown below</p>
 	<img src="maycontaincargo.png" alt="May Contain Cargo art" style="display: block; margin: 40px auto; width: 300px; border-radius: 20px;">
   </section>
   
