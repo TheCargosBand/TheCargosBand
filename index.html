@@ -1,138 +1,293 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>The Cargos | Indie Rock Band</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    :root {
+      --accent: #007bff;
+      --accent-dark: #0056b3;
+      --bg: #0b0b0c;
+      --bg-secondary: #161616;
+      --text-color: #ffffff;
+      --font-main: 'Inter', sans-serif;
+      --font-heading: 'Bebas Neue', sans-serif;
+    }
+
+    body.light-mode {
+      --bg: #ffffff;
+      --bg-secondary: #e0e0e0;
+      --text-color: #111;
+      --accent: #0033cc;
+      --accent-dark: #002299;
+    }
+
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #111;
-      color: #fff;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      font-family: var(--font-main);
+      background-color: var(--bg);
+      color: var(--text-color);
+      transition: background-color 0.3s, color 0.3s;
     }
 
     header {
-      background: url('band-photo.jpg') no-repeat center center/cover;
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,0.6)), url('band-photo.jpg') no-repeat center center/cover;
       height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
       flex-direction: column;
+      text-align: center;
+      position: relative;
     }
 
     header h1 {
-      font-size: 4em;
-      margin: 0;
-      text-shadow: 2px 2px 10px #000;
+      font-family: var(--font-heading);
+      font-size: 7rem;
+      color: var(--accent);
+      animation: dropIn 2s ease;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+      letter-spacing: 2px;
     }
 
-    header p {
-      font-size: 1.5em;
-      color: #ccc;
-      margin-top: 10px;
+    @keyframes dropIn {
+      0% { opacity: 0; transform: translateY(-60px); }
+      100% { opacity: 1; transform: translateY(0); }
     }
 
     nav {
-      background: #222;
-      padding: 1em;
-      text-align: center;
+      width: 100%;
+      background: var(--bg-secondary);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--accent);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
     nav a {
-      color: #fff;
-      margin: 0 1em;
+      color: var(--text-color);
       text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    .toggle-mode {
+      background: none;
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.5em 1em;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s, color 0.3s;
+      margin-left: 2rem;
+    }
+
+    .toggle-mode:hover {
+      background: var(--accent);
+      color: var(--bg);
     }
 
     section {
-      padding: 4em 2em;
-      max-width: 900px;
+      padding: 5em 2em;
+      max-width: 1000px;
       margin: auto;
     }
 
     h2 {
-      color: #f94d00;
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      margin-bottom: 0.5em;
+      color: var(--accent);
+      text-align: center;
     }
 
-    .shows li {
-      margin-bottom: 1em;
+    .divider {
+      width: 60px;
+      height: 4px;
+      background-color: var(--accent);
+      margin: 0 auto 2em;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: inherit;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 1em;
+    }
+
+    img {
+      width: 300px;
+      height: 300px;
+      display: block;
+      margin: 2em auto;
+      border-radius: 1rem;
+      box-shadow: 0 0 50px rgba(0,123,255,0.7);
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .social {
+      margin: 0 10px;
+      color: var(--accent);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social:hover {
+      color: var(--accent-dark);
     }
 
     footer {
-      background: #222;
+      background: var(--bg-secondary);
       text-align: center;
-      padding: 2em;
-      font-size: 0.9em;
+      padding: 2em 1em;
+      font-size: 0.9rem;
+      border-top: 1px solid #333;
     }
 
-    a.social {
-      margin: 0 10px;
-      color: #f94d00;
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
     }
 
-	@keyframes fadeSlideUp {
-		from {
-			opacity: 0;
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
+    #preloader span {
+      color: var(--accent);
+      font-family: var(--font-heading);
+      font-size: 3rem;
+      animation: pulse 1s infinite;
+    }
 
-	.animated-text {
-		  animation: fadeSlideUp 1.5s ease forwards;
-	}
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
 
-	  .animated-subtext {
-		  animation: fadeSlideUp 1.5s ease forwards;
-		  animation-delay 0.5s
-		  opacity: 0;
-	  }
-		
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 4rem;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-
-  <header>
-	  <h1 class="animated-text">The Cargos</h1>
-	  <p class ="animated-subtext">Est. 2025.</p>
-  </header>
+  <div id="preloader"><span>Loading...</span></div>
 
   <nav>
-    <a href="#about">About</a>
-    <a href="#music">Music</a>
-    <a href="#shows">Shows</a>
-    <a href="#contact">Contact</a>
-
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#music">Music</a>
+      <a href="#shows">Shows</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="toggle-mode" onclick="toggleMode()">Toggle Mode</button>
   </nav>
 
-  <section id="about">
+  <header>
+    <h1>The Cargos</h1>
+  </header>
+
+  <section id="about" class="fade-up">
     <h2>About</h2>
+    <div class="divider"></div>
     <p>The Cargos are a 4-piece indie rock band known for gritty guitar riffs, haunting solos, and raw energy. Based in Glasgow, we blend classic influences with a modern edge. Formed in 2025, we’re here to shake things up.</p>
   </section>
 
-  <section id="music">
+  <section id="music" class="fade-up">
     <h2>Listen</h2>
-	<p>  To Our Debut Self titled piece</p>
-		<audio controls>
-			<source src="debut.mp3" type="audio/mpeg">
-			Your browser doesnt support the audio element.
-		</audio controls>
-		<a href="https://on.soundcloud.com/YHZV6HkpFVej3y5NVQ" target="_blank">Listen to us on Soundcloud!</a>
-	<h2>Whats Next?</h2>
-	<p> The Cargos are currently working on an inaugral album named "May Contain Cargo." This does not yet have a release date but expect late 2025 - early 2026. As of now, our song is only available on Soundcloud and this website but that will change with the release of our album. Our album cover is shown below</p>
-	<img src="maycontaincargo.png" alt="May Contain Cargo art" style="display: block; margin: 40px auto; width: 300px; border-radius: 20px;">
+    <div class="divider"></div>
+    <p>To Our Debut Self titled piece</p>
+    <audio controls>
+      <source src="debut.mp3" type="audio/mpeg">
+      Your browser doesn't support the audio element.
+    </audio>
+    <p><a href="https://on.soundcloud.com/YHZV6HkpFVej3y5NVQ" target="_blank">Listen to us on Soundcloud!</a></p>
+    <h2>What's Next?</h2>
+    <div class="divider"></div>
+    <p>The Cargos are currently working on an inaugural album named "May Contain Cargo." Expect a release in late 2025 or early 2026. The album art is shown below.</p>
+    <img src="maycontaincargo.png" alt="May Contain Cargo album cover">
   </section>
-  
-  <section id="shows"</a>
-	<h2>Shows</h2>
-	<p>We currently have no shows scheduled. Check back soon for more information. </p>
 
-  <section id="contact">
+  <section id="shows" class="fade-up">
+    <h2>Shows</h2>
+    <div class="divider"></div>
+    <p>We currently have no shows scheduled. Check back soon for updates.</p>
+  </section>
+
+  <section id="contact" class="fade-up">
     <h2>Contact & Socials</h2>
+    <div class="divider"></div>
     <p>Booking/Press: <a href="mailto:thecargosband@gmail.com">thecargosband@gmail.com</a></p>
     <p>
       <a class="social" href="https://instagram.com/TheCargos.band" target="_blank">Instagram</a>
@@ -145,5 +300,19 @@
     <p>© 2025 The Cargos. All rights reserved.</p>
   </footer>
 
+  <script>
+    window.addEventListener('load', () => {
+      document.getElementById('preloader').style.display = 'none';
+
+      const faders = document.querySelectorAll('.fade-up');
+      faders.forEach((el, index) => {
+        setTimeout(() => el.style.animationDelay = `${index * 0.2}s`, 100);
+      });
+    });
+
+    function toggleMode() {
+      document.body.classList.toggle('light-mode');
+    }
+  </script>
 </body>
 </html>
